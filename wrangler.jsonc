@@ -1,0 +1,12 @@
+{
+  "send_metrics": false,
+  "name": "a",
+  "main": "_fresh/server.js",
+  "compatibility_date": "2026-05-01",
+  "preview_urls": false,
+  "build": { "command": "npx deno install && npx deno task build" },
+  "minify": true,
+  "keep_names": false,
+  "observability": { "enabled": false },
+  "assets": { "directory": "_fresh/client" },
+}

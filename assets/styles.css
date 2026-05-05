@@ -1,0 +1,116 @@
+@import "tailwindcss";
+@import "@catppuccin/tailwindcss/mocha.css";
+@plugin "daisyui";
+
+@font-face {
+  font-family: "Saitamaar";
+  src: url(/fonts/saitamaar.woff2);
+}
+
+@font-face {
+  font-family: "Neon";
+  src: url(/fonts/neon.woff2);
+}
+
+@font-face {
+  font-family: "Argon";
+  src: url(/fonts/argon.woff2);
+}
+
+@font-face {
+  font-family: "Xenon";
+  src: url(/fonts/xenon.woff2);
+}
+
+@font-face {
+  font-family: "Radon";
+  src: url(/fonts/radon.woff2);
+}
+
+@font-face {
+  font-family: "Krypton";
+  src: url(/fonts/krypton.woff2);
+}
+
+@layer component {
+  .vcenter {
+    @apply flex justify-center;
+  }
+  .hcenter {
+    @apply flex items-center;
+  }
+  .fcenter {
+    @apply flex size-full items-center justify-center;
+  }
+  .center {
+    @apply flex items-center justify-center;
+  }
+  .flex-col {
+    @apply flex flex-col;
+  }
+  .flex-col-rev {
+    @apply flex flex-col-reverse;
+  }
+}
+
+@theme {
+  --font-art: "Saitamaar";
+  --font-normal: "Neon";
+  --font-title: "Argon";
+  --font-formal: "Xenon";
+  --font-handwriting: "Radon";
+  --font-rigid: "Krypton";
+  --default-font-family: var(--font-normal), var(--font-mono);
+  --animate-blink: blink 1.5s steps(2, start) infinite;
+  --dash: "- ";
+  @keyframes blink {
+    to {
+      visibility: hidden;
+    }
+  }
+}
+
+#grid {
+  grid-template-areas:
+    "clock clock"
+    "calendar fill"
+    "subgrid subgrid";
+  grid-template-rows:
+    auto
+    auto
+    1fr;
+  grid-template-columns: auto 1fr;
+}
+
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(workspace) {
+  animation: slide-out 0.5s;
+}
+
+::view-transition-new(workspace) {
+  animation: slide-in 0.5s;
+}
+
+@keyframes slide-out {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
