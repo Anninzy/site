@@ -33,7 +33,7 @@ export default define.page(() => {
     <div class="vcenter size-full items-end">
       <Corner />
       <div class="max-h-[75%] w-[50%] overflow-scroll rounded-t-2xl bg-ctp-base p-4">
-        <Entry h1="Tic Tac Toe" p="this one is squared" href="/app/ttt" />
+        <Entry h1="Tic Tac Toe" p="this one is squared" href="ttt" />
       </div>
       <Corner extraClass="transform-[scaleX(-1)]" />
     </div>
