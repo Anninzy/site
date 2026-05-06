@@ -17,6 +17,7 @@ deno task fmt
 
 # TODO
 
+- [ ] mobile app folder dots inside folder bottom to indicate pages
 - [ ] mobile app & portfolio page
 - [ ] iframe
 - [ ] refactor ttt?
