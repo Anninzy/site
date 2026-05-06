@@ -61,11 +61,20 @@
   --font-handwriting: "Radon";
   --font-rigid: "Krypton";
   --default-font-family: var(--font-normal), var(--font-mono);
-  --animate-blink: blink 1.5s steps(2, start) infinite;
   --dash: "- ";
+  --animate-blink: blink 1.5s steps(2, start) infinite;
   @keyframes blink {
     to {
       visibility: hidden;
+    }
+  }
+  --animate-scroll: scroll 10s linear infinite;
+  @keyframes scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
     }
   }
 }

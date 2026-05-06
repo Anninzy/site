@@ -13,17 +13,49 @@ interface ItemProps extends OptionalParentProps {
   links: { href: string; icon: string }[];
 }
 
-const bgClass = "absolute size-full mask-y-from-80% object-cover";
+interface GalleryProps {
+  srcs: string[];
+}
+
+const bgClass = "absolute size-full mask-y-from-80%";
 const slantClass =
   "bg-ctp-surface0/60 backdrop-blur-xs py-6 px-8 [clip-path:polygon(100%_0,calc(100%-2rem)_100%,0_100%,2rem_0)]";
 const github = "mask-[url(/github.svg)] bg-ctp-text mask-contain";
 
 function Video({ src }: SrcProps) {
-  return <video class={bgClass} src={src} autoplay muted loop data-z-index-0 />;
+  return (
+    <video
+      class={`${bgClass} object-cover`}
+      src={src}
+      autoplay
+      muted
+      loop
+      data-z-index-0
+    />
+  );
 }
 
 function Image({ src }: SrcProps) {
-  return <img class={bgClass} src={src} data-z-index-0 />;
+  return <img class={`${bgClass} object-cover`} src={src} data-z-index-0 />;
+}
+
+function Gallery({ srcs }: GalleryProps) {
+  function Carousel() {
+    return (
+      <div class="-mr-px flex animate-scroll">
+        {srcs.map((src) => (
+          <img class="max-w-none" key={src} src={src} />
+        ))}
+      </div>
+    );
+  }
+
+  return (
+    <div class={`${bgClass} flex overflow-x-hidden`} data-z-index-0>
+      <Carousel />
+      <Carousel />
+    </div>
+  );
 }
 
 function Item({ h1, h2, p, links, children }: ItemProps) {
@@ -73,10 +105,6 @@ export default define.page(() => {
               {
                 href: "https://github.com/anninzy/site",
                 icon: github,
-              },
-              {
-                href: "https://a.nnin.workers.dev",
-                icon: "bg-[url(/favicon.svg)] bg-cover",
               },
             ]}
           >
@@ -133,17 +161,26 @@ export default define.page(() => {
           </Item>
 
           <Item
-            h1="CTP-DISCORD-TRANSPARENT"
-            h2="Modification atop the Catppuccin theme"
-            p="Built with <3. Written in CSS."
+            h1="THEMES"
+            h2="Custom themes for various things"
+            p="Discord, Firefox"
             links={[
               {
                 href: "https://github.com/anninzy/catppuccin-discord-transparent",
                 icon: github,
               },
+              {
+                href: "https://github.com/anninzy/firefox-transparent",
+                icon: github,
+              },
             ]}
           >
-            <Image src="https://raw.githubusercontent.com/anninzy/catppuccin-discord-transparent/master/screenshots/mocha.png" />
+            <Gallery
+              srcs={[
+                "https://raw.githubusercontent.com/anninzy/catppuccin-discord-transparent/master/screenshots/mocha.png",
+                "https://raw.githubusercontent.com/anninzy/firefox-transparent/master/screenshots/preview.png",
+              ]}
+            />
           </Item>
 
           <Item
