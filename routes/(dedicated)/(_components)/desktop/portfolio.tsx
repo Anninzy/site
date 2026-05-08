@@ -42,9 +42,9 @@ function Image({ src }: SrcProps) {
 function Gallery({ srcs }: GalleryProps) {
   function Carousel() {
     return (
-      <div class="-mr-px flex animate-scroll">
+      <div class="flex h-full animate-scroll">
         {srcs.map((src) => (
-          <img class="max-w-none" key={src} src={src} />
+          <img class="h-full max-w-none" key={src} src={src} />
         ))}
       </div>
     );
