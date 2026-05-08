@@ -160,20 +160,6 @@ export default define.page(() => {
           <Item2 />
 
           <Item
-            h1="BOT"
-            h2="Personal Discord Bot"
-            p="Built with DiscordGo. Written in Go."
-            links={[
-              {
-                href: "https://github.com/anninzy/bot",
-                icon: <FontAwesomeIcon icon={faGithub} />,
-              },
-            ]}
-          >
-            <Image src="" />
-          </Item>
-
-          <Item
             h1="ROFI-MODES"
             h2="Functional Rofi themes & modes"
             p="Built with <3. Written in Bash."
