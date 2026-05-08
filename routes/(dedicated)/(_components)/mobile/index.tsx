@@ -21,7 +21,7 @@ function Subsubgrid({
     <div class={`h-full w-1/2 gap-4 ${reverse ? "flex-col-rev" : "flex-col"}`}>
       <a href={href}>
         <div class={`[view-transition-name:${name}]`}>
-          <Folder>
+          <Folder extraClass="bg-ctp-crust/60 *:rounded-3xl">
             <div class="bg-ctp-teal" />
             <div class="bg-ctp-sky" />
             <div class="bg-ctp-lavender" />

@@ -6,7 +6,7 @@ export default function ({
 }: ExtraClassProps & ParentProps) {
   return (
     <div
-      class={`grid aspect-square grid-cols-2 gap-4 rounded-3xl bg-ctp-crust/60 p-4 *:rounded-3xl ${extraClass}`}
+      class={`grid aspect-square grid-cols-2 grid-rows-2 gap-12 rounded-3xl p-12 ${extraClass}`}
     >
       {children}
     </div>
