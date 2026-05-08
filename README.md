@@ -19,5 +19,5 @@ deno task fmt
 
 - [ ] mobile app folder dots inside folder bottom to indicate pages
 - [ ] mobile app & portfolio page
-- [ ] iframe
 - [ ] refactor ttt?
+- [ ] math the rotate angle for portfolio link icons slant?

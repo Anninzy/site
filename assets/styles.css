@@ -79,6 +79,24 @@
   }
 }
 
+#syncer {
+  scroll-timeline-name: --sync;
+}
+
+#syncee {
+  animation: sync linear;
+  animation-timeline: --sync;
+}
+
+@keyframes sync {
+  0% {
+    transform: translateY(0);
+  }
+  15% {
+    transform: translateY(-100%);
+  }
+}
+
 #grid {
   grid-template-areas:
     "clock clock"

@@ -1,6 +1,9 @@
 import { define } from "@/utils.ts";
-import { ChevronDownIcon } from "@heroicons/react/24/solid";
+import type { VNode } from "preact";
 import type { OptionalParentProps } from "@/utils.ts";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 interface SrcProps {
   src: string;
@@ -10,17 +13,21 @@ interface ItemProps extends OptionalParentProps {
   h1: string;
   h2: string;
   p: string;
-  links: { href: string; icon: string }[];
+  links: { href: string; icon: VNode }[];
 }
 
 interface GalleryProps {
   srcs: string[];
 }
 
+interface IframeProps {
+  recurse: boolean;
+}
+
 const bgClass = "absolute size-full mask-y-from-80%";
 const slantClass =
   "bg-ctp-surface0/60 backdrop-blur-xs py-6 px-8 [clip-path:polygon(100%_0,calc(100%-2rem)_100%,0_100%,2rem_0)]";
-const github = "mask-[url(/github.svg)] bg-ctp-text mask-contain";
+const pagesClass = "flex size-full flex-wrap";
 
 function Video({ src }: SrcProps) {
   return (
@@ -42,7 +49,7 @@ function Image({ src }: SrcProps) {
 function Gallery({ srcs }: GalleryProps) {
   function Carousel() {
     return (
-      <div class="flex h-full animate-scroll">
+      <div class="flex h-full animate-scroll will-change-transform">
         {srcs.map((src) => (
           <img class="h-full max-w-none" key={src} src={src} />
         ))}
@@ -69,12 +76,14 @@ function Item({ h1, h2, p, links, children }: ItemProps) {
             <p class="text-xs">{p}</p>
           </div>
 
-          <div class={`flex-col *:*:size-8 ${slantClass}`}>
-            {links.map((link) => (
-              <a href={link.href} target="_blank" class="fcenter">
-                <div class={link.icon} />
-              </a>
-            ))}
+          <div class={`center ${slantClass}`}>
+            <div class="rotate-10 flex-col gap-2">
+              {links.map((link) => (
+                <a href={link.href} target="_blank" class="-rotate-10 *:size-8">
+                  {link.icon}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -84,53 +93,71 @@ function Item({ h1, h2, p, links, children }: ItemProps) {
   );
 }
 
-function Browser({ children }: OptionalParentProps) {
+function Item2() {
   return (
-    <div class="mockup-window size-full rounded-xl bg-ctp-crust">
-      {children}
-    </div>
+    <Item
+      h1="DUSE-MASH"
+      h2="Reimplementation of a certain rhythm game"
+      p="Built with Godot. Written in GDScript."
+      links={[
+        {
+          href: "https://github.com/anninzy/duse-mash",
+          icon: <FontAwesomeIcon icon={faGithub} />,
+        },
+      ]}
+    >
+      <Video src="/duse-mash.mp4" />
+    </Item>
+  );
+}
+
+function Item1({ recurse }: IframeProps) {
+  return (
+    <Item
+      h1="SITE"
+      h2="Ad astra abyssosque"
+      p="Built with Deno. Written in TypeScript."
+      links={[
+        {
+          href: "https://github.com/anninzy/site",
+          icon: <FontAwesomeIcon icon={faGithub} />,
+        },
+      ]}
+    >
+      <FontAwesomeIcon
+        icon={faChevronDown}
+        className="absolute bottom-10 w-[4vmin] animate-bounce will-change-transform"
+      />
+      {recurse ? (
+        <>
+          <div
+            data-z-index-0
+            class="absolute size-full scale-80 overflow-y-hidden"
+          >
+            <div id="syncee" class={pagesClass}>
+              <Item1 recurse={false} />
+              <Item2 />
+            </div>
+          </div>
+
+          <div class="absolute size-full bg-ctp-base/60" data-z-index-0 />
+        </>
+      ) : undefined}
+    </Item>
   );
 }
 
 export default define.page(() => {
   return (
     <div class="size-full p-4">
-      <Browser>
-        <div class="flex size-full flex-wrap gap-20 overflow-y-auto bg-ctp-base">
-          <Item
-            h1="SITE"
-            h2="Ad astra abyssosque"
-            p="Built with Deno. Written in TypeScript."
-            links={[
-              {
-                href: "https://github.com/anninzy/site",
-                icon: github,
-              },
-            ]}
-          >
-            <ChevronDownIcon class="absolute bottom-10 w-[5vmin] animate-bounce" />
-            <div data-z-index-0 class="absolute size-full p-12">
-              <Browser>
-                <div class="size-full bg-ctp-mantle p-12">
-                  <Browser />
-                </div>
-              </Browser>
-            </div>
-          </Item>
+      <div class="mockup-window size-full rounded-xl bg-ctp-crust">
+        <div
+          id="syncer"
+          class={`${pagesClass} gap-20 overflow-y-auto bg-ctp-base`}
+        >
+          <Item1 recurse />
 
-          <Item
-            h1="DUSE-MASH"
-            h2="Reimplementation of a certain rhythm game"
-            p="Built with Godot. Written in GDScript."
-            links={[
-              {
-                href: "https://github.com/anninzy/duse-mash",
-                icon: github,
-              },
-            ]}
-          >
-            <Video src="/duse-mash.mp4" />
-          </Item>
+          <Item2 />
 
           <Item
             h1="BOT"
@@ -139,7 +166,7 @@ export default define.page(() => {
             links={[
               {
                 href: "https://github.com/anninzy/bot",
-                icon: github,
+                icon: <FontAwesomeIcon icon={faGithub} />,
               },
             ]}
           >
@@ -153,7 +180,7 @@ export default define.page(() => {
             links={[
               {
                 href: "https://github.com/anninzy/rofi-modes",
-                icon: github,
+                icon: <FontAwesomeIcon icon={faGithub} />,
               },
             ]}
           >
@@ -167,11 +194,11 @@ export default define.page(() => {
             links={[
               {
                 href: "https://github.com/anninzy/catppuccin-discord-transparent",
-                icon: github,
+                icon: <FontAwesomeIcon icon={faGithub} />,
               },
               {
                 href: "https://github.com/anninzy/firefox-transparent",
-                icon: github,
+                icon: <FontAwesomeIcon icon={faGithub} />,
               },
             ]}
           >
@@ -190,12 +217,12 @@ export default define.page(() => {
             links={[
               {
                 href: "https://github.com/nixos/nixpkgs",
-                icon: github,
+                icon: <FontAwesomeIcon icon={faGithub} />,
               },
             ]}
           />
         </div>
-      </Browser>
+      </div>
     </div>
   );
 });
