@@ -96,7 +96,7 @@ export default define.page(() => {
   return (
     <div class="size-full p-4">
       <Browser>
-        <div class="flex size-full flex-wrap gap-20 overflow-scroll bg-ctp-base">
+        <div class="flex size-full flex-wrap gap-20 overflow-y-auto bg-ctp-base">
           <Item
             h1="SITE"
             h2="Ad astra abyssosque"
